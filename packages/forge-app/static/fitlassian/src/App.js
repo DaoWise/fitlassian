@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { invoke } from "@forge/bridge";
-import { Rive } from "@rive-app/canvas";
+import Rive from "@rive-app/react-canvas";
 
 function App() {
   const [storyPoints, setStoryPoints] = useState(null);
@@ -10,17 +10,19 @@ function App() {
   }, []);
 
   if (!storyPoints) {
-    return null;
+    return <div>Loading...</div>;
   }
+
   return (
     <div
       style={{
-        height: "100%",
+        height: "90vh",
+        width: "100vw",
       }}
     >
-      {/* <Rive src="https://cdn.rive.app/animations/vehicles.riv" /> */}
+      <Rive src="https://cdn.rive.app/animations/vehicles.riv" />
 
-      <div>{storyPoints}</div>
+      <div>{storyPoints?.toString()??0}</div>
     </div>
   );
 }
