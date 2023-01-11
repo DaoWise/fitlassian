@@ -3,20 +3,14 @@ import { invoke } from "@forge/bridge";
 import { Rive } from "@rive-app/canvas";
 
 function App() {
-  const [data, setData] = useState(null);
+  const [storyPoints, setStoryPoints] = useState(null);
 
   useEffect(() => {
-    invoke("getText", { example: "my-invoke-variable" }).then(setData);
+    invoke("get-story-points").then(setStoryPoints);
   }, []);
 
-  if (!data) {
-    return (
-      <Card>
-        <LoadingContainer>
-          <Spinner size="large" />
-        </LoadingContainer>
-      </Card>
-    );
+  if (!storyPoints) {
+    return null;
   }
   return (
     <div
@@ -24,7 +18,9 @@ function App() {
         height: "100%",
       }}
     >
-      <Rive src="https://cdn.rive.app/animations/vehicles.riv" />
+      {/* <Rive src="https://cdn.rive.app/animations/vehicles.riv" /> */}
+
+      <div>{storyPoints}</div>
     </div>
   );
 }

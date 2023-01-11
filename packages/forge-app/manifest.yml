@@ -7,18 +7,6 @@ modules:
       viewportSize: medium
       title: Fitlassian
       icon: https://developer.atlassian.com/platform/forge/images/issue-panel-icon.svg
-  jira:customField:
-    - key: cf-story-point
-      name: Fitlassian Health Point
-      description: Tracks the development cost of features in terms of number of kilometres the dev needs to cover
-      type: number
-      validation:
-        expression: value == null || (value >= 0 && value <= 100)
-        errorMessage: The value must be a number between 0 and 100.
-      formatter:
-        expression: "`${value} km`"
-      readOnly: false
-      function: 
   function:
     - key: resolver
       handler: index.handler
@@ -35,5 +23,15 @@ permissions:
     fetch:
       client:
         - '*'
+  scopes:
+    - read:field:jira
+    - read:project:jira
+    - read:issue:jira
+    - read:user:jira
+    - manage:jira-project
+    - read:screen:jira
+    - write:screen:jira
+    - read:jira-work
+    - storage:app
 app:
-  id: ari:cloud:ecosystem::app/811f3c58-0978-45dd-ac69-0d1f398ec14f
+  id: ari:cloud:ecosystem::app/a996f64b-50f8-44f8-b6b7-6f65faa556e8
