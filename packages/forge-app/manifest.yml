@@ -25,5 +25,15 @@ modules:
 resources:
   - key: main
     path: static/fitlassian/build
+permissions:
+  content:
+    styles:
+      - 'unsafe-inline'
+    scripts:
+      - unsafe-eval
+  external:
+    fetch:
+      client:
+        - '*'
 app:
   id: ari:cloud:ecosystem::app/811f3c58-0978-45dd-ac69-0d1f398ec14f
