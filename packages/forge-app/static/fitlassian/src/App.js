@@ -1,8 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { invoke } from "@forge/bridge";
 import Rive from "@rive-app/react-canvas";
 
+import { appReducer } from "./reducers/appReducer";
+import { APP_STATES } from './constants';
+import InitializingScreen from './components/InitializingScreen';
+import CheckStravaIntegration from './components/CheckStravaIntegration';
+import ConnectToStrava from './components/ConnectToStrava';
+
+const initialState = {
+  appState: APP_STATES.INITIALIZING,
+}
+
 function App() {
+  const [state, dispatch] = useReducer(appReducer, initialState);
   const [storyPoints, setStoryPoints] = useState(null);
   const [level, setLevel] = useState(1)
   const levels = {
@@ -18,17 +29,28 @@ function App() {
     1: 'level01.riv'
   }
 
-  const BASE_URL = "https://raw.githubusercontent.com/DaoWise/fitlassian/main/assets/";
-
   useEffect(() => {
-    invoke("get-story-points").then(setStoryPoints);
+    (async () => {
+      const assigneeAccountId = await invoke("get-assignee-account-id");
+      dispatch({
+        type: 'SET_USER_ACCOUNT_ID',
+        payload: {
+          assigneeAccountId,
+        }
+      })
+    })();
   }, []);
 
-  if (!storyPoints) {
-    return <div>Loading...</div>;
+  switch(state.appState) {
+    case APP_STATES.INITIALIZING:
+      return <InitializingScreen />
+    case APP_STATES.CHECK_STRAVA_INTEGRATION:
+      return <CheckStravaIntegration state={state} dispatch={dispatch} />
+    case APP_STATES.CONNECT_TO_STRAVA:
+      return <ConnectToStrava state={state} dispatch={dispatch} />
   }
 
-
+  const BASE_URL = "https://raw.githubusercontent.com/DaoWise/fitlassian/main/assets/";
 
   return (
     <div key={level}>
@@ -37,6 +59,12 @@ function App() {
         {Object.keys(levels).map((level, index) => {
           return <button onClick={() => setLevel(index + 1)}>Level {index + 1}</button>
         })}
+
+      </div>
+      <div className="flex items-center justify-around">
+        <button onClick={() => invoke("get-story-points").then(setStoryPoints)}>Refresh</button>
+        {/* Remove this button */}
+        <button onClick={() => invoke("disconnect-strava", state.assigneeAccountId)}>Disconnect Strava</button>
       </div>
     </div>
   );

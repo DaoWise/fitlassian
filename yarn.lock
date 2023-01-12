@@ -51,6 +51,13 @@
   dependencies:
     tslib "^1.11.0"
 
+"@forge/bridge@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@forge/bridge/-/bridge-2.5.0.tgz#f492ccbe23689d5ae8e76696b055499bc24d157d"
+  integrity sha512-Blt/qpnzIThHS9NCEBPLqRhlTedI4rLWO5oMwDavhe/C+9d2IhZunZdwHiqISiFz6c1YLXp3nZc/GUnB7A2QKQ==
+  dependencies:
+    "@types/history" "^4.7.8"
+
 "@forge/egress@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@forge/egress/-/egress-1.1.1.tgz#c5e3646d46cf038c6ea85aa5cebbd5d663007518"
@@ -186,6 +193,11 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
   integrity sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==
+
+"@types/history@^4.7.8":
+  version "4.7.11"
+  resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.11.tgz#56588b17ae8f50c53983a524fc3cc47437969d64"
+  integrity sha512-qjDJRrmvBMiTx+jyLxvLfJU7UznFuokDv4f3WRuriHKERccVpFU+8XMQUAbDzoiJCsmexxRExQeMwwCdamSKDA==
 
 "@types/json-schema@^7.0.3":
   version "7.0.11"

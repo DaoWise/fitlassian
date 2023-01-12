@@ -56,4 +56,27 @@ resolver.define('get-story-points', async ({ context }) => {
   return getStoryPoints(storyPointsFieldData, issueData);
 });
 
+resolver.define('get-assignee-account-id', async ({ context }) => {
+  const issueData = await getIssueData(context);
+  console.log('Assignee', issueData.fields.assignee);
+  return issueData.fields.assignee.accountId;
+});
+
+resolver.define('check-is-strava-connected', async ({ context, payload }) => {
+  const { assigneeAccountId } = payload;
+  const stravaSecret = await storage.getSecret(`${assigneeAccountId}:strava:secret`);
+  return !!stravaSecret;
+});
+
+resolver.define('set-strava-secret', async ({ context, payload }) => {
+  const { assigneeAccountId } = payload;
+  const stravaSecret = await storage.setSecret(`${assigneeAccountId}:strava:secret`, assigneeAccountId);
+  return !!stravaSecret;
+});
+
+resolver.define('disconnect-strava', async ({ context, payload }) => {
+  const { assigneeAccountId } = payload;
+  await storage.deleteSecret(`${assigneeAccountId}:strava:secret`);
+});
+
 export const handler = resolver.getDefinitions();
