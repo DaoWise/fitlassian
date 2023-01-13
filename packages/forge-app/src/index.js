@@ -61,14 +61,12 @@ resolver.define('get-assignee-account-id', async ({ context }) => {
 resolver.define('check-is-strava-connected', async ({ context, payload }) => {
   const { assigneeAccountId } = payload;
   const stravaSecret = await storage.getSecret(`${assigneeAccountId}:strava:secret`);
-  console.log(stravaSecret, !!stravaSecret, `${assigneeAccountId}:strava:secret`);
   return !!stravaSecret;
 });
 
 resolver.define('set-strava-secret', async ({ context, payload }) => {
   const { assigneeAccountId } = payload;
   const stravaSecret = await storage.setSecret(`${assigneeAccountId}:strava:secret`, `${assigneeAccountId}:strava`);
-  console.log(`${assigneeAccountId}:strava:secret`);
 });
 
 resolver.define('disconnect-strava', async ({ context, payload }) => {
@@ -103,26 +101,34 @@ resolver.define('get-total-healthGoal', async ({ context, payload }) => {
       // if current task belongs to assignee
       if(currentTask.fields.assignee.accountId == assigneeAccountId) {
         console.log("task belongs to assignee");
-        console.log({ fields: assigneeGoal.tasks[currentTask.key].fields})
-        // reset task sp in assigneeGoal
-        const taskStoryPointData = getStoryPointsFieldData(assigneeGoal.tasks[currentTask.key].fields);
-        const taskStoryPoints = getStoryPoints(taskStoryPointData, assigneeGoal.tasks[currentTask.key]) || 0;
-        console.log({ currentTaskStoryPoints, taskStoryPoints });
 
-        if(taskStoryPoints !== currentTaskStoryPoints) {
-          assigneeGoal.inProgressTaskGoal -= taskStoryPoints;
-          assigneeGoal.inProgressTaskGoal += currentTaskStoryPoints;
-        }
+        // reset task sp in assigneeGoal
+        const fieldId = storyPointsFieldData.id
+        const taskStoryPoints = assigneeGoal.tasks[currentTask.key].fields[fieldId] || 0;
+        console.log({ fieldId, currentTaskStoryPoints, taskStoryPoints });
 
         // if current task status done
         if(currentTask.fields.status.name === 'Done') {
+          
           console.log("task is done");
-          // add task sp to completed task goal
-          assigneeGoal.completedTaskGoal += currentTaskStoryPoints;
-          // subtract task sp from in progress goal
-          assigneeGoal.inProgressTaskGoal -= currentTaskStoryPoints;
+          if(taskStoryPoints !== currentTaskStoryPoints) {
+            assigneeGoal.completedTaskGoal += currentTaskStoryPoints;
+            assigneeGoal.inProgressTaskGoal -= taskStoryPoints;
+            assigneeGoal.tasks[currentTask.key].fields[fieldId] = currentTaskStoryPoints;
+          } else {
+            // add task sp to completed task goal
+            assigneeGoal.completedTaskGoal += currentTaskStoryPoints;
+            // subtract task sp from in progress goal
+            assigneeGoal.inProgressTaskGoal -= currentTaskStoryPoints;
+          }
           // remove task from tasks
           delete assigneeGoal.tasks[currentTask.key];
+        } else {
+          if(taskStoryPoints !== currentTaskStoryPoints) {
+            assigneeGoal.inProgressTaskGoal -= taskStoryPoints;
+            assigneeGoal.inProgressTaskGoal += currentTaskStoryPoints;
+            assigneeGoal.tasks[currentTask.key].fields[fieldId] = currentTaskStoryPoints
+          }
         }
       } else {
         // if current task doesnt not belong to assignee
