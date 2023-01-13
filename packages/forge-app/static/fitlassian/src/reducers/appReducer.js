@@ -23,6 +23,6 @@ export const appReducer = (state, action) => {
         isStravaConnected: true,
       }
     default:
-      return state;
+      return {...state};
   }
 };

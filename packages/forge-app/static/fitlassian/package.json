@@ -7,8 +7,10 @@
     "@atlaskit/css-reset": "^6.0.1",
     "@forge/bridge": "^2.5.0",
     "@rive-app/react-canvas": "^3.0.34",
+    "daisyui": "^2.46.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-icons": "^4.7.1"
   },
   "devDependencies": {
     "react-scripts": "^5.0.1",

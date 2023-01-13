@@ -6,7 +6,7 @@ const CheckStravaIntegration = ({ state, dispatch }) => {
 
   React.useEffect(() => {
     (async () => {
-      const isStravaConnected = await invoke("check-is-strava-connected");
+      const isStravaConnected = await invoke("check-is-strava-connected", { assigneeAccountId });
       if(isStravaConnected) {
         dispatch({
           type: 'STRAVA_CONNECTED',
