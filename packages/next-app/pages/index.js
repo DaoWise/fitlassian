@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import { Homee } from "../components/Homee";
 import { Motivation } from "../components/Motivation";
-import { How } from "../components/How";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +17,6 @@ export default function Home() {
       </Head>
       <Homee />
       <Motivation />
-      <How />
     </div>
   );
 }

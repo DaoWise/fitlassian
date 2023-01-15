@@ -77,13 +77,19 @@ const Navbar = () => {
               <Link href="/">Home</Link>
             </li> */}
             <li className="ml-10 text-sm uppercase hover:border-b">
-              <Link href="/#motivation">Motivation</Link>
+              <Link href="/#motivation">Pitch</Link>
             </li>
-            <li className="ml-10 text-sm uppercase hover:border-b">
+            {/* <li className="ml-10 text-sm uppercase hover:border-b">
               <Link href="/#how">How it works</Link>
-            </li>
+            </li> */}
             <li className="ml-10 text-sm uppercase hover:border-b">
-              <Link href="/#joinus">Join Us</Link>
+              <Link
+                href="https://developer.atlassian.com/console/install/a996f64b-50f8-44f8-b6b7-6f65faa556e8?signature=c2e0d1768220b0fad9180ddc381c36aefaf4fc153f3d0d89cacff56735fa88ac&product=jira"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                Try it!
+              </Link>
             </li>
           </ul>
           {/* Hamburger Icon */}
@@ -115,7 +121,9 @@ const Navbar = () => {
           <div>
             <div className="flex w-full items-center justify-between">
               <div className="font-bold">
-                <h1>FitLassian</h1>
+                <Link href="/">
+                  <h1>FitLassian</h1>
+                </Link>
               </div>
               {/* <Link href="/">
                 <a>
@@ -144,17 +152,21 @@ const Navbar = () => {
               </Link> */}
               <Link href="/#motivation">
                 <li onClick={() => setNav(false)} className="py-4 text-sm">
-                  Motivation
+                  Pitch
                 </li>
               </Link>
-              <Link href="/#how">
+              {/* <Link href="/#how">
                 <li onClick={() => setNav(false)} className="py-4 text-sm">
                   How it works
                 </li>
-              </Link>
-              <Link href="/#joinus">
+              </Link> */}
+              <Link
+                href="https://developer.atlassian.com/console/install/a996f64b-50f8-44f8-b6b7-6f65faa556e8?signature=c2e0d1768220b0fad9180ddc381c36aefaf4fc153f3d0d89cacff56735fa88ac&product=jira"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 <li onClick={() => setNav(false)} className="py-4 text-sm">
-                  Join Us
+                  Try it!
                 </li>
               </Link>
             </ul>
