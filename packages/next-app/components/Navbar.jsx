@@ -55,7 +55,9 @@ const Navbar = () => {
     >
       <div className="flex justify-between items-center w-full h-full px-2 2xl:px-16">
         <div className="font-bold">
-          <h1>FitLassian</h1>
+          <Link href="/">
+            <h1>FitLassian</h1>
+          </Link>
         </div>
 
         {/* <Link href="/">
@@ -71,9 +73,9 @@ const Navbar = () => {
         </Link> */}
         <div>
           <ul className="hidden md:flex">
-            <li className="ml-10 text-sm uppercase hover:border-b">
+            {/* <li className="ml-10 text-sm uppercase hover:border-b">
               <Link href="/">Home</Link>
-            </li>
+            </li> */}
             <li className="ml-10 text-sm uppercase hover:border-b">
               <Link href="/#motivation">Motivation</Link>
             </li>
@@ -135,11 +137,11 @@ const Navbar = () => {
           </div>
           <div className="py-4 flex flex-col">
             <ul className="uppercase">
-              <Link href="/">
+              {/* <Link href="/">
                 <li onClick={() => setNav(false)} className="py-4 text-sm">
                   Home
                 </li>
-              </Link>
+              </Link> */}
               <Link href="/#motivation">
                 <li onClick={() => setNav(false)} className="py-4 text-sm">
                   Motivation
