@@ -7,7 +7,7 @@ export const Motivation = () => {
     <div id="pitch">
       <div className="md:p-12 my-10 flex justify-center items-center w-full">
         <iframe
-          src="https://www.youtube.com/embed/cXda6JOUwbw"
+          src="https://www.youtube.com/embed/ACFXoz_b6NM"
           title="FitLassian - Gamifying Scrum Sprints"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
