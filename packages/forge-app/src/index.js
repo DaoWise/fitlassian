@@ -75,7 +75,16 @@ resolver.define('disconnect-strava', async ({ context, payload }) => {
 });
 
 resolver.define('get-total-distance-covered', async ({ context, payload }) => {
-  return 10;
+  const { assigneeAccountId } = payload;
+  const distance = await storage.get(`${assigneeAccountId}:distance`);
+  if (distance) {
+    return distance;
+  }
+  else{
+    const mockDisctance = Math.floor(Math.random() * 400);
+    await storage.set(`${assigneeAccountId}:distance`, mockDisctance);
+    return mockDisctance;
+  }
 });
 
 resolver.define('get-current-user-id', async ({ context, payload }) => {
