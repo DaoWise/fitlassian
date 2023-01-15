@@ -4,7 +4,7 @@ import Img2 from "../public/assets/first.png";
 
 export const Motivation = () => {
   return (
-    <div id="motivation">
+    <div id="pitch">
       <div className="p-36 mx-36 my-10">
         <iframe
           width="884"
